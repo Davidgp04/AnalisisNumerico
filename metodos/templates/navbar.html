@@ -1,0 +1,30 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
+    <title>navbar</title>
+</head>
+<body>
+    <nav class="mi-navbar">
+        <div class="mi-img">
+            <a href="/">
+                <img src="{% static 'img/dibu.jpeg' %}" alt="logo">
+            </a>
+        </div>
+        <ul>
+            <li>
+                <a href="#">Metodos</a>
+            </li>
+            <li>
+                <a href="#">about</a>
+            </li>
+            <li>
+                <a href="#">help</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>
