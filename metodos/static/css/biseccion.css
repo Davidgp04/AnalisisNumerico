@@ -1,0 +1,31 @@
+.caja{
+    margin: 80px;
+    display: flex;
+    justify-content: space-between;
+   
+}
+
+table{
+    width: 30%;
+    height: 100%;
+}
+
+th, td{
+    text-align: center;
+    
+}
+
+tr,th,td{
+    border: 1px solid black;
+}
+
+tr{
+    height: 50px;
+}
+
+form{
+    border: 1px solid black;
+    padding: 40px;
+    
+}
+

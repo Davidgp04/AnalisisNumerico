@@ -1,0 +1,33 @@
+h2 , h5 {
+    
+    margin-bottom: 40px;
+}
+
+.container{
+    margin: 50px;
+}
+
+.titulo p{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.opciones{
+    display: grid;
+    grid-template-columns: 250px 250px 250px 250px;
+    margin-bottom: 20px;
+}
+
+.opciones a{
+    width: 200px;
+    padding: 16px 24px;
+    border: 2px solid rgb(106, 178, 178);
+    border-radius: 4px;
+    text-decoration: none;
+    color: rgb(106, 178, 178);
+    margin-bottom: 30px;
+}
+
+.campos{
+    
+}

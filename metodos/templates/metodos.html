@@ -1,5 +1,31 @@
 {% extends 'base.html' %} {% load static %} 
 
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/metodos.css' %}" />
+{% endblock styles %}
 {% block content %}
-<h1>sapo</h1>
+<div class="container">    
+    <h2>Metodos</h2>
+    <h5>Aca encontras 24 tipos de metodos</h5>
+    <div class="titulo">
+        <p>Solving systems by graphing</p>
+    </div>
+    <div class="opciones">
+        <a href="">Opcion</a>
+    </div>
+    <div class="titulo">
+        <p>titulo 2</p>
+    </div>
+    <div class="opciones">
+        <a href="{% url 'biseccion'%}">Biseccion</a>
+        <a href="">Opcion2</a>
+        <a href="">Opcion3</a>
+        <a href="">Opcion4</a>
+        <a href="">Opcion5</a>
+        <a href="">Opcion6</a>
+    </div>
+
+    
+</div>
 {% endblock content %}
+{% block scripts %}<script src="https://kit.fontawesome.com/2c5ccac35e.js" crossorigin="anonymous"></script>{% endblock  %}

@@ -5,3 +5,6 @@ def index(request):
 
 def metodos(request):
     return render(request, 'metodos.html', {})
+
+def biseccion(request):
+    return render(request, 'biseccion.html', {})
