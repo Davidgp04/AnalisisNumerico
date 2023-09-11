@@ -8,27 +8,29 @@
 
 
 <div class="caja">
-    <form action="">
+    <form action="" method="POST">
+        {% csrf_token %}
         <div class="campo">
             <p>Funcion</p>
-            <input type="text">
+            <input type="text" name="Funcion">
         </div>
         <div class="campo">
-            <p>Funcion</p>
-            <input type="text">
+            <p>a</p>
+            <input type="number" name="LimiteInferior">
         </div>
         <div class="campo">
-            <p>Funcion</p>
-            <input type="text">
+            <p>b</p>
+            <input type="number" name="LimiteSuperior">
         </div>
     <div class="campo">
-        <p>Funcion</p>
-        <input type="text">
+        <p>Tolerancia</p>
+        <input type="text" name="Tol">
     </div>
     <div class="campo">
-        <p>Funcion</p>
-        <input type="text">
+        <p>Iteraciones Max(100)</p>
+        <input type="number" name="Iteraciones">
     </div>
+    <button type="submit">Calcular</button>
     </form>
     
         <table>
@@ -36,44 +38,29 @@
               <th>Iteration</th>
               <th>a</th>
               <th>xm</th>
+              <th>b</th>
               <th>f(xm)</th>
               <th>E</th>
             </tr>
-            <tr>
-              <td>Prueba</td>
-              <td>Prueba</td>
-              <td>Prueba</td>
-              <td>Prueba</td>
-              <td>Prueba</td>
-            </tr>
-            <tr>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-            </tr>
-            <tr>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-            </tr>
-            <tr>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-            </tr>
-            <tr>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-                <td>Prueba</td>
-            </tr>
+            {% if resultado %}
+                {% for iter in resultado %}
+                    <tr>
+                        {% for dato in iter %}
+                            <td>{{dato}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            {% endif %}
+            
         </table>
 </div>
 
