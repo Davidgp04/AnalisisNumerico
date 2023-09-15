@@ -8,5 +8,16 @@
 <h5 class="text-center">En esta pagina encontraras una lista de metodos numericos para solucion de ecuaciones no lineales</h5><br>
 <a href="{% url 'metodos' %}" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" ><h3 class="text-center">Metodos</h3></a>
 
+<form action="" method="POST">
+    {% csrf_token %}
+    <p>Funcion</p>
+    <input type="text" name="Funcion">
+    <button type="submit">Calcular</button>
+</form>
+{% if grafica %}
+    {{ grafica|safe }}
+{% endif %}
+
+
 
 {% endblock content %}

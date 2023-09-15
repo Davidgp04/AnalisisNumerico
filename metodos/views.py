@@ -1,7 +1,15 @@
 from django.shortcuts import render
 from metodos.Biseccion import Biseccion
+from metodos.Grafica import Grafica
+from metodos.InputFixed import InputFixed
 def index(request):
-    return render(request, 'home.html', {})
+    grafica = None
+    if request.method == 'POST':
+        grafica = None
+        funcion = request.POST['Funcion']
+        Fcorregida = InputFixed.CorregirFuncion(funcion) 
+        grafica = Grafica.Graficar(Fcorregida)
+    return render(request, 'home.html', {'grafica': grafica})
 
 def metodos(request):
     return render(request, 'metodos.html', {})
