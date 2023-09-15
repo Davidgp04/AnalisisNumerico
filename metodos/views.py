@@ -14,6 +14,17 @@ def index(request):
 def metodos(request):
     return render(request, 'metodos.html', {})
 
+def falseposition(request):
+    return render(request, 'falseposition.html')
+
+def newtonRaphson(request):
+    return render(request, 'newtonRaphson.html')
+
+def secante(request):
+    return render(request, 'secante.html')
+
+def raicesMultiples(request):
+    return render(request, 'raicesMultiples.html')
 def biseccion(request):
     resultado = []
     if request.method == 'POST':
