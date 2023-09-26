@@ -11,11 +11,11 @@
     </div>
     <div class="campo">
       <p>Valor inicial (x0)</p>
-      <input type="number" name="inicialx0" />
+      <input type="text" name="inicialx0" />
     </div>
     <div class="campo">
         <p>Valor inicial (x1)</p>
-        <input type="number" name="incialx1" />
+        <input type="text" name="inicialx1" />
     </div>
     <div class="campo">
       <p>Tolerancia</p>
@@ -23,7 +23,7 @@
     </div>
     <div class="campo">
       <p>Iteraciones Max(100)</p>
-      <input type="number" name="Iteraciones" />
+      <input type="text" name="Iteraciones" />
     </div>
     <button type="submit">Calcular</button>
   </form>
@@ -51,5 +51,5 @@
     {% endif %}
   </table>
 </div>
-
+<p>{{mensaje}}</p>
 {% endblock content%}

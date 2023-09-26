@@ -6,20 +6,16 @@
   <form action="" method="POST">
     {% csrf_token %}
     <div class="campo">
-      <p>Funcion F</p>
+      <p>Funcion</p>
       <input type="text" name="Funcion" />
     </div>
     <div class="campo">
-      <p>Primera derivada</p>
-      <input type="text" name="PrimeraDerivada" />
+      <p>a</p>
+      <input type="text" name="LimiteInferior" />
     </div>
     <div class="campo">
-        <p>Segunda derivada</p>  
-        <input type="text" name="SegundaDerivada" />
-    </div>
-    <div class="campo">
-        <p>Valor incial(X0)</p>  
-        <input type="text" name="ValorInicial" />
+      <p>b</p>
+      <input type="text" name="LimiteSuperior" />
     </div>
     <div class="campo">
       <p>Tolerancia</p>
@@ -34,9 +30,11 @@
 
   <table>
     <tr>
-      <th>Iteration(i)</th>
-      <th>xi</th>
-      <th>f(xi)</th>
+      <th>Iteracion</th>
+      <th>a</th>
+      <th>xm</th>
+      <th>b</th>
+      <th>f(xm)</th>
       <th>E</th>
     </tr>
     {% if resultado %} {% for iter in resultado %}
@@ -47,6 +45,8 @@
     </tr>
     {% endfor %} {% else %}
     <tr>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>

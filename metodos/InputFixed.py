@@ -14,5 +14,6 @@ class InputFixed:
             NuevoString = NuevoString.replace("exp(", "np.exp(")
         if "^" in inputString:
             NuevoString = NuevoString.replace("^", "**")
+        if "abs" in inputString:
+            NuevoString = NuevoString.replace("abs(", "np.absolute(")
         return NuevoString
-    print(CorregirFuncion("cos(x^2)"))
