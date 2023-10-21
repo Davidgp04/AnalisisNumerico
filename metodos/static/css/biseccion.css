@@ -26,6 +26,17 @@ tr{
 form{
     border: 1px solid black;
     padding: 40px;
-    
+    border-radius: 2%;
+}
+.campo{
+    margin-top: 10px;
 }
 
+button{ 
+    margin-top: 20px;
+    border-radius: 10% ;
+}
+
+p{
+    margin: 0;
+}
