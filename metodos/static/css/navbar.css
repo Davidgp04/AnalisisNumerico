@@ -3,15 +3,16 @@
 .mi-navbar {
     display: flex;
     flex-direction: row;
-    -webkit-box-pack: justify;
     justify-content: space-between;
+    align-items: center; /* Añadido para centrar verticalmente los elementos */
     width: 100%;
-    background-color: rgb(244, 93, 72);
-    border-bottom: 2px solid rgb(51,49,50);
+    background-color: #3498db; /* Cambiado el color de fondo a azul */
+    border-bottom: 2px solid #333; /* Cambiado el color del borde inferior a gris */
+    padding: 10px 0; /* Espaciado interior ajustado */
 }
 
 .mi-img {
-    padding: 16px 26px 12px;
+    padding: 10px; /* Espaciado interior ajustado */
 }
 
 .mi-img img {
@@ -20,19 +21,26 @@
 
 .mi-navbar ul {
     list-style-type: none;
-    margin: 0px;
-    padding: 30px;
-    float: right;
-    font-weight: 700;
+    margin: 0;
+    padding: 0;
 }
 
 .mi-navbar ul > li {
     display: inline-block;
-    margin-left: 25px;
+    margin-left: 15px; /* Espacio reducido entre elementos del menú */
 }
 
 .mi-navbar li a {
     display: block;
     text-decoration: none;
-    color: white;
+    color: #fff; /* Color del texto en el enlace */
+    font-weight: 500; /* Cambiado el peso de la fuente a 500 */
+    padding: 5px 10px; /* Espaciado interior del enlace */
+    border-radius: 5px; /* Añadido un radio de borde para un aspecto más elegante */
+    background-color: #e74c3c; /* Color de fondo del enlace */
+}
+
+/* Cambiar el color del enlace al pasar el mouse sobre él */
+.mi-navbar li a:hover {
+    background-color: #c0392b; /* Nuevo color de fondo al pasar el mouse */
 }

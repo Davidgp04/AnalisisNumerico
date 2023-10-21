@@ -1,33 +1,49 @@
-h2 , h5 {
-    
-    margin-bottom: 40px;
+h2, h5 {
+    margin-bottom: 20px; /* Reducido el margen inferior */
 }
 
-.container{
-    margin: 50px;
+.container {
+    margin: 20px; /* Reducido el margen alrededor del contenedor */
 }
 
-.titulo p{
+.titulo p {
     font-weight: bold;
     font-size: 1.2em;
+    color: #333; /* Cambiado el color del texto a gris oscuro */
+    margin-bottom: 20px; /* Reducido el margen inferior */
 }
 
-.opciones{
+.opciones {
     display: grid;
-    grid-template-columns: 250px 250px 250px 250px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(4, 1fr); /* Cambiado el número de columnas y espaciado uniforme */
+    gap: 20px; /* Agregado espacio entre las opciones */
+    margin-bottom: 20px; /* Reducido el margen inferior */
 }
 
-.opciones a{
-    width: 200px;
+.opciones a {
+    width: 100%; /* Ancho del 100% para ocupar el espacio de la columna */
     padding: 16px 24px;
-    border: 2px solid rgb(106, 178, 178);
+    border: 2px solid #3498db; /* Cambiado el color del borde a azul */
     border-radius: 4px;
     text-decoration: none;
-    color: rgb(106, 178, 178);
-    margin-bottom: 30px;
+    color: #3498db; /* Cambiado el color del texto a azul */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s; /* Agregado efecto de transición */
 }
 
-.campos{
-    
+.opciones a:hover {
+    background-color: #3498db; /* Cambiado el color de fondo al pasar el mouse */
+    color: #fff; /* Cambiado el color del texto al pasar el mouse */
+}
+
+/* Estilo adicional para el contenido de los cuadros */
+.opciones a h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.opciones a p {
+    font-size: 1em;
 }
