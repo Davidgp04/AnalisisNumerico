@@ -1,0 +1,127 @@
+{% extends 'base.html' %} {% load static %} 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/Matrices.css' %}" />
+{% endblock styles %}
+{% block content %}
+<h2>Defina el tamaño de la matriz</h2>
+<form id="matrixSizeForm">
+    <label for="rows">Número de filas:</label>
+    <input type="number" id="rows" name="rows" min="1" required>
+    <label for="columns">Número de columnas:</label>
+    <input type="number" id="columns" name="columns" min="1" required>
+    <input type="submit" value="Enviar">
+</form>
+
+<h2>Ingrese los elementos de la matriz</h2>
+<form method="post" id="matrixForm" style="display: none;">
+    {% csrf_token %}
+    <label>Ingrese la matriz A</label>
+    <div id="matrixInputs"></div>
+    <br>
+    <label>Ingrese la matriz B</label>
+    <div id="answerInputs"></div>
+    <br>
+    <label>Ingrese el vector inicial (x0)</label>
+    <div id="initialValue"></div>
+    <br>
+    <label>Tolerancia</label>
+    <br>
+    <input type="text" name="Tol" />
+    <br>
+    <label>Jacobi o Gauss (1 o 2)</label>
+    <br>
+    <input type="number" name="met">
+    <br>
+    <label>Iteraciones</label>
+    <br>
+    <input type="number" name="Iter">
+    <br>
+    <input type="hidden" id="rowsInput" name="rows">
+    <input type="hidden" id="columnsInput" name="columns">
+    <input type="submit" value="Enviar">
+</form>
+<div class="table-container">
+<table>
+    <thead>
+        <tr>
+          <th>Iteracion</th>
+          <th>E</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if datos_iteraciones %} {% for datos, error in datos_iteraciones %}
+        <tr>
+            <td>{% for value in datos %}
+                {{ value }} <br>
+                {% endfor %}
+            </td>
+            <td> {{ error }}</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td rowspan="2"></td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+</div>
+<br>
+<p>{{ mensaje }}</p>
+<br>
+<p>{{ converge }}</p>
+{% endblock content%}
+
+{% block scripts %}
+<script>
+    document.getElementById('matrixSizeForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var rows = parseInt(document.getElementById('rows').value);
+        var columns = parseInt(document.getElementById('columns').value);
+
+        document.getElementById('rowsInput').value = rows;
+        document.getElementById('columnsInput').value = columns;
+
+        var matrixInputs = document.getElementById('matrixInputs');
+        matrixInputs.innerHTML = '';
+
+        for (var i = 0; i < rows; i++) {
+            for (var j = 0; j < columns; j++) {
+                var input = document.createElement('input');
+                input.type = 'number';
+                input.name = 'element_' + (i * columns + j + 1);
+                input.placeholder = 'Elemento ' + (i * columns + j + 1);
+                input.required = true;
+                matrixInputs.appendChild(input);
+            }
+            matrixInputs.appendChild(document.createElement('br'));
+        }
+        
+        var answerInputs = document.getElementById('answerInputs');
+        answerInputs.innerHTML = '';
+        for(var i = 0; i < rows; i++) {
+            var input2 = document.createElement('input');
+            input2.type = 'number';
+            input2.name = 'answer_' + (i + 1);
+            input2.placeholder = 'Valor b ' + (i + 1);
+            input.required = true;
+            answerInputs.appendChild(input2);
+            answerInputs.appendChild(document.createElement('br'));
+        }
+
+        var initialValue = document.getElementById('initialValue');
+        initialValue.innerHTML = '';
+        for(var i = 0; i < rows; i++) {
+            var input3 = document.createElement('input');
+            input3.type = 'number';
+            input3.name = 'initial_' + (i + 1);
+            input3.placeholder = 'Valor x ' + (i + 1);
+            input3.required = true;
+            initialValue.appendChild(input3);
+            initialValue.appendChild(document.createElement('br'));
+        }
+
+        document.getElementById('matrixForm').style.display = 'block';
+    });
+</script>
+{% endblock scripts %}

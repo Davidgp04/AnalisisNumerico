@@ -15,7 +15,6 @@ class ReglaFalsa:
         :return: solución 
         """
         f = InputFixed.CorregirFuncion(f)
-        print(f)
         solucion = 0
         resultados = []
         Error = 100
@@ -25,12 +24,12 @@ class ReglaFalsa:
         fb = eval(f)
         if fa == 0:
             solucion = a
-            print(solucion,"es raiz de f(x)")
-            return solucion
+            mensaje = f'{solucion} es raiz de f(x)'
+            return resultados, mensaje, solucion
         elif fb == 0:
             solucion = b
-            print(solucion,"es raiz de f(x)")
-            return solucion
+            mensaje = f'{solucion} es raiz de f(x)'
+            return resultados, mensaje, solucion
         elif fa*fb < 0:
             c = 0
             x = (a * fb - b * fa) / (fb - fa)
@@ -52,18 +51,19 @@ class ReglaFalsa:
             if fx == 0:
                 solucion = "{:.5f}".format(x)
                 mensaje = str(solucion) + " es raiz de f(x)"
-                return resultados, mensaje
+                return resultados, mensaje, solucion
             elif Error <= tol:
                 solucion = "{:.5f}".format(x)
                 mensaje = str(solucion) + " es una aproximacion de un raiz de f(x) con una tolerancia " + str(tol)
-                return resultados, mensaje
+                return resultados, mensaje, solucion
             else:
                 solucion = "{:.5f}".format(x)
                 mensaje = "Fracaso en " + str(niter) + " iteraciones"
-                return None, mensaje
+                return resultados, mensaje, solucion
         else:
-            print("El intervalo es inadecuado")
-            return
+            mensaje = "El intervalo es inadecuado"
+            return None, mensaje, None
+        
     def ReglaFalsaRel(f, a, b, tol, niter):
         """
         Método de regla falsa

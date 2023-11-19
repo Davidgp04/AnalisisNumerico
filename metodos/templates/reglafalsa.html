@@ -63,4 +63,7 @@
   </table>
 </div>
 <p>{{mensaje}}</p>
+{% if funcion %}
+  <a href="http://127.0.0.1:8000/graficaSolucion/{{funcion}}/{{solucion}}">Graficar Solucion</a>
+{% endif %}  
 {% endblock content%}
