@@ -38,6 +38,12 @@
     <div class="input-container">
         <input type="number" name="Iter">
     </div>
+    <label>Error</label>
+    <select name="Error">
+        <option value="1" selected="selected">Absoluto</option>
+        <option value="2">Relativo</option>
+    </select>
+    <br>
     <input type="hidden" id="rowsInput" name="rows">
     <input type="hidden" id="columnsInput" name="columns">
     <input type="submit" value="Enviar">
@@ -94,7 +100,7 @@
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < columns; j++) {
                 var input = document.createElement('input');
-                input.type = 'number';
+                input.type = 'text';
                 input.name = 'element_' + (i * columns + j + 1);
                 input.placeholder = 'Elemento ' + (i * columns + j + 1);
                 input.required = true;
@@ -107,7 +113,7 @@
         answerInputs.innerHTML = '';
         for(var i = 0; i < rows; i++) {
             var input2 = document.createElement('input');
-            input2.type = 'number';
+            input2.type = 'text';
             input2.name = 'answer_' + (i + 1);
             input2.placeholder = 'Valor b ' + (i + 1);
             input.required = true;
@@ -119,7 +125,7 @@
         initialValue.innerHTML = '';
         for(var i = 0; i < rows; i++) {
             var input3 = document.createElement('input');
-            input3.type = 'number';
+            input3.type = 'text';
             input3.name = 'initial_' + (i + 1);
             input3.placeholder = 'Valor x ' + (i + 1);
             input3.required = true;

@@ -8,6 +8,7 @@ from metodos.Secante import Secante
 from metodos.PuntoFijo import PuntoFijo
 from metodos.ReglaFalsa import ReglaFalsa
 from metodos.RaicesMultiples import RaicesMultiples
+from metodos.RaicesMultiples2 import RaicesMultiples2
 import matlab.engine
 import numpy as np
 
@@ -140,6 +141,36 @@ def raicesMultiples(request):
             grafica = Grafica.GraficarSolucion(Funcion, float(solucion))
     return render(request, 'raicesmultiples.html',{'resultado': resultado, 'mensaje': mensaje, 'grafica': grafica})
 
+def raicesMultiples2(request):
+    resultado = []
+    mensaje = ""
+    grafica = None
+    if request.method == 'POST':
+        Funcion = request.POST['Funcion']
+        PrimeraDerivada = request.POST['PrimeraDerivada']
+        valorm = request.POST['m']
+        x0 = request.POST['ValorInicial']
+        tol = request.POST['Tol']
+        niter = request.POST['Iteraciones']
+        error = request.POST['Error']
+        
+        valorm = int(valorm)
+        error = int(error)
+        x0 = float(x0)
+        tol = float(tol)
+        niter = int(niter)
+        if(error == 1):
+            resultado, mensaje, solucion = RaicesMultiples.RaicesMultiples(Funcion ,PrimeraDerivada ,valorm , x0, tol, niter)
+        else:
+            resultado, mensaje, solucion = RaicesMultiples.RaicesMultiplesRel(Funcion ,PrimeraDerivada ,valorm , x0, tol, niter)
+
+        if resultado == None:
+            pass
+        else:
+            grafica = Grafica.GraficarSolucion(Funcion, float(solucion))
+    return render(request, 'raicesmultiples2.html',{'resultado': resultado, 'mensaje': mensaje, 'grafica': grafica})
+
+
 def puntofijo(request):
     resultado = []
     mensaje = ""
@@ -213,17 +244,17 @@ def jacobiSeid(request):
         for i in range(0, filas):
             for j in range(0, columnas):
                 elemento = f'element_{indice}'
-                matrizA[i][j] = int(request.POST[elemento])
+                matrizA[i][j] = float(request.POST[elemento])
                 indice += 1
         indice = 1
         for i in range(0, filas):
             answer = f'answer_{indice}'
-            vectorB[i][0] = int(request.POST[answer])
+            vectorB[i][0] = float(request.POST[answer])
             indice += 1
         indice = 1
         for i in range(0, filas):
             initial = f'initial_{indice}'
-            vectorX0[i][0] = int(request.POST[initial])
+            vectorX0[i][0] = float(request.POST[initial])
             indice += 1
         A = matlab.double(matrizA)
         b = matlab.double(vectorB)
@@ -234,7 +265,11 @@ def jacobiSeid(request):
         iteraciones = int(iteraciones)
         met = request.POST['met']
         met = int(met)
-        resultados = eng.MatJacobiSeid(x0,A,b,tol,iteraciones,met,nargout = 5)
+        tipoError = request.POST['Error']
+        if tipoError == 1:
+            resultados = eng.MatJacobiSeid(x0,A,b,tol,iteraciones,met,nargout = 5)
+        else:
+            resultados = eng.MatJacobiSeidRel(x0,A,b,tol,iteraciones,met,nargout = 5)
         E = resultados[0]
         S = resultados[1]
         Iteraciones = resultados[2]
@@ -280,17 +315,17 @@ def SOR(request):
         for i in range(0, filas):
             for j in range(0, columnas):
                 elemento = f'element_{indice}'
-                matrizA[i][j] = int(request.POST[elemento])
+                matrizA[i][j] = float(request.POST[elemento])
                 indice += 1
         indice = 1
         for i in range(0, filas):
             answer = f'answer_{indice}'
-            vectorB[i][0] = int(request.POST[answer])
+            vectorB[i][0] = float(request.POST[answer])
             indice += 1
         indice = 1
         for i in range(0, filas):
             initial = f'initial_{indice}'
-            vectorX0[i][0] = int(request.POST[initial])
+            vectorX0[i][0] = float(request.POST[initial])
             indice += 1
         A = matlab.double(matrizA)
         b = matlab.double(vectorB)
@@ -301,7 +336,11 @@ def SOR(request):
         iteraciones = int(iteraciones)
         valorW = request.POST['w']
         valorW = float(valorW)
-        resultados = eng.SOR(x0, A, b, tol, iteraciones, valorW,nargout = 5)
+        tipoError = request.POST['Error']
+        if tipoError == 1:
+            resultados = eng.SOR(x0, A, b, tol, iteraciones, valorW,nargout = 5)
+        else:
+            resultados = eng.SORrel(x0, A, b, tol, iteraciones, valorW,nargout = 5)
         E = resultados[0]
         S = resultados[1]
         Iteraciones = resultados[2]

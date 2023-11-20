@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% load static %} {% block styles %}
+<link rel="stylesheet" href="{% static 'css/biseccion.css' %}" />
+{% endblock styles %} {% block content %}
+
+<div class="caja">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="campo">
+      <p>Funcion F</p>
+      <input type="text" name="Funcion" />
+    </div>
+    <div class="campo">
+      <p>Primera derivada</p>
+      <input type="text" name="PrimeraDerivada" />
+    </div>
+    <div class="campo">
+        <p>Valor m</p>  
+        <input type="text" name="m" />
+    </div>
+    <div class="campo">
+        <p>Valor incial(X0)</p>  
+        <input type="text" name="ValorInicial" />
+    </div>
+    <div class="campo">
+      <p>Tolerancia</p>
+      <input type="text" name="Tol" />
+    </div>
+    <div class="campo">
+      <p>Iteraciones Max(100)</p>
+      <input type="text" name="Iteraciones" />
+    </div>
+    <div class="campo">
+      <p>Error</p>
+      <select name="Error">
+        <option value="1" selected="selected">Absoluto</option>
+        <option value="2">Relativo</option>
+      </select>
+    </div>
+    <button type="submit">Calcular</button>
+  </form>
+
+  <table>
+    <tr>
+      <th>Iteration(i)</th>
+      <th>xi</th>
+      <th>f(xi)</th>
+      <th>E</th>
+    </tr>
+    {% if resultado %} {% for iter in resultado %}
+    <tr>
+      {% for dato in iter %}
+      <td>{{dato}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %} {% else %}
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    {% endif %}
+  </table>
+{% if grafica %}
+  {{ grafica|safe }}
+{% endif %}
+</div>
+<p>{{mensaje}}</p>
+{% endblock content%}
