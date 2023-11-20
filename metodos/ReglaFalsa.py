@@ -25,7 +25,7 @@ class ReglaFalsa:
         if fa == 0:
             solucion = a
             mensaje = f'{solucion} es raiz de f(x)'
-            return resultados, mensaje, solucion
+            return None, mensaje, solucion
         elif fb == 0:
             solucion = b
             mensaje = f'{solucion} es raiz de f(x)'
@@ -59,7 +59,7 @@ class ReglaFalsa:
             else:
                 solucion = "{:.5f}".format(x)
                 mensaje = "Fracaso en " + str(niter) + " iteraciones"
-                return resultados, mensaje, solucion
+                return resultados, mensaje, None
         else:
             mensaje = "El intervalo es inadecuado"
             return None, mensaje, None
@@ -112,15 +112,15 @@ class ReglaFalsa:
             if fx == 0:
                 solucion = "{:.5f}".format(x)
                 mensaje = str(solucion) + " es raiz de f(x)"
-                return resultados, mensaje
+                return resultados, mensaje, solucion
             elif Error <= tol:
                 solucion = "{:.5f}".format(x)
                 mensaje = str(solucion) + " es una aproximacion de un raiz de f(x) con una tolerancia " + str(tol)
-                return resultados, mensaje
+                return resultados, mensaje, solucion
             else:
                 solucion = "{:.5f}".format(x)
                 mensaje = "Fracaso en " + str(niter) + " iteraciones"
-                return None, mensaje
+                return None, mensaje, None
         else:
             print("El intervalo es inadecuado")
             return

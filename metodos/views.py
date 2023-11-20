@@ -29,6 +29,7 @@ def reglafalsa(request):
     resultado = []
     mensaje = ""
     solucion = None
+    grafica = None
     if request.method == 'POST':
         funcion = request.POST['Funcion']
         a = request.POST['LimiteInferior']
@@ -45,15 +46,20 @@ def reglafalsa(request):
 
         if(error == 1):
             resultado, mensaje, solucion = ReglaFalsa.ReglaFalsa(funcion, a, b, tol, niter)
-            funcion = quote(funcion)
-            print(funcion)
         else:
-            resultado, mensaje = ReglaFalsa.ReglaFalsaRel(funcion, a, b, tol, niter)
-    return render(request, 'reglafalsa.html', {'resultado': resultado, 'mensaje': mensaje, 'solucion': solucion, 'funcion': funcion})
+            resultado, mensaje, solucion = ReglaFalsa.ReglaFalsaRel(funcion, a, b, tol, niter)
+
+        if(solucion == None):
+            pass
+        else:
+            grafica = Grafica.GraficarSolucion(funcion, float(solucion))
+
+    return render(request, 'reglafalsa.html', {'resultado': resultado, 'mensaje': mensaje, 'solucion': solucion, 'grafica': grafica})
 
 def newtonRaphson(request):
     resultado = []
     mensaje = ""
+    grafica = None
     if request.method == 'POST':
         funcion = request.POST['Funcion']
         funcionDerivada = request.POST['primeraDerivada']
@@ -67,14 +73,20 @@ def newtonRaphson(request):
         tol = float(tol)
         niter = int(niter)
         if(error == 1):
-            resultado, mensaje = NewtonRaphson.Newton(funcion,funcionDerivada, x0, tol, niter)
+            resultado, mensaje, solucion = NewtonRaphson.Newton(funcion,funcionDerivada, x0, tol, niter)
         else:
-            resultado, mensaje = NewtonRaphson.NewtonRel(funcion,funcionDerivada, x0, tol, niter)
-    return render(request, 'newtonRaphson.html',{'resultado': resultado, 'mensaje': mensaje})
+            resultado, mensaje, solucion = NewtonRaphson.NewtonRel(funcion,funcionDerivada, x0, tol, niter)
+
+        if(solucion == None):
+            pass
+        else:
+            grafica = Grafica.GraficarSolucion(funcion, float(solucion))
+    return render(request, 'newtonRaphson.html',{'resultado': resultado, 'mensaje': mensaje, 'grafica': grafica})
 
 def secante(request):
     resultado = []
     mensaje = ""
+    grafica = None
     if request.method == 'POST':
         f = request.POST['Funcion']
         a = request.POST['inicialx0']
@@ -90,15 +102,20 @@ def secante(request):
         niter = int(niter)
         Fcorregida = InputFixed.CorregirFuncion(f)
         if(error == 1):
-            resultado, mensaje = Secante.Secante(Fcorregida,a,b,tol,niter)
+            resultado, mensaje, solucion = Secante.Secante(Fcorregida,a,b,tol,niter)
         else:
-            resultado, mensaje = Secante.SecanteRel(Fcorregida,a,b,tol,niter)
-       
-    return render(request, 'secante.html',{'resultado': resultado, 'mensaje': mensaje})
+            resultado, mensaje, solucion = Secante.SecanteRel(Fcorregida,a,b,tol,niter)
+
+        if(solucion == None):
+            pass
+        else:
+            grafica = Grafica.GraficarSolucion(f, float(solucion))
+    return render(request, 'secante.html',{'resultado': resultado, 'mensaje': mensaje, 'grafica': grafica})
 
 def raicesMultiples(request):
     resultado = []
     mensaje = ""
+    grafica = None
     if request.method == 'POST':
         Funcion = request.POST['Funcion']
         PrimeraDerivada = request.POST['PrimeraDerivada']
@@ -113,16 +130,20 @@ def raicesMultiples(request):
         tol = float(tol)
         niter = int(niter)
         if(error == 1):
-           
-            resultado, mensaje = RaicesMultiples.RaicesMultiples(Funcion ,PrimeraDerivada ,SegundaDerivada , x0, tol, niter)
+            resultado, mensaje, solucion = RaicesMultiples.RaicesMultiples(Funcion ,PrimeraDerivada ,SegundaDerivada , x0, tol, niter)
         else:
-           
-            resultado, mensaje = RaicesMultiples.RaicesMultiplesRel(Funcion ,PrimeraDerivada ,SegundaDerivada , x0, tol, niter)
-    return render(request, 'raicesmultiples.html',{'resultado': resultado, 'mensaje': mensaje})
+            resultado, mensaje, solucion = RaicesMultiples.RaicesMultiplesRel(Funcion ,PrimeraDerivada ,SegundaDerivada , x0, tol, niter)
+
+        if resultado == None:
+            pass
+        else:
+            grafica = Grafica.GraficarSolucion(Funcion, float(solucion))
+    return render(request, 'raicesmultiples.html',{'resultado': resultado, 'mensaje': mensaje, 'grafica': grafica})
 
 def puntofijo(request):
     resultado = []
     mensaje = ""
+    grafica = None
     if request.method == 'POST':
         Funcionf = request.POST['Funcionf']
         Funciong = request.POST['Funciong']
@@ -136,14 +157,20 @@ def puntofijo(request):
         tol = float(tol)
         niter = int(niter)
         if(error == 1):
-            resultado, mensaje = PuntoFijo.PuntoFijo(Funcionf,Funciong, x0, tol, niter)
+            resultado, mensaje, solucion = PuntoFijo.PuntoFijo(Funcionf,Funciong, x0, tol, niter)
         else:
-             resultado, mensaje = PuntoFijo.PuntoFijoRel(Funcionf,Funciong, x0, tol, niter)
-    return render(request, 'puntofijo.html',{'resultado': resultado, 'mensaje': mensaje})
+             resultado, mensaje, solucion = PuntoFijo.PuntoFijoRel(Funcionf,Funciong, x0, tol, niter)
+        
+        if solucion == None:
+            pass
+        else:
+            grafica = Grafica.GraficarSolucion(Funcionf,float(solucion))
+    return render(request, 'puntofijo.html',{'resultado': resultado, 'mensaje': mensaje, 'grafica': grafica})
 
 def biseccion(request):
     resultado = []
     mensaje = ""
+    grafica = None
     if request.method == 'POST':
         funcion = request.POST['Funcion']
         limiteInf = request.POST['LimiteInferior']
@@ -159,30 +186,15 @@ def biseccion(request):
         niter = int(niter)
         Fcorregida = InputFixed.CorregirFuncion(funcion)
         if(error == 1):
-            resultado, mensaje = Biseccion.biseccion(Fcorregida, limiteInf, limiteSup, tol, niter)
+            resultado, mensaje, solucion = Biseccion.biseccion(Fcorregida, limiteInf, limiteSup, tol, niter)
         else:
-            resultado, mensaje = Biseccion.biseccionRel(Fcorregida, limiteInf, limiteSup, tol, niter)
-    return render(request, 'biseccion.html', {'resultado': resultado, 'mensaje': mensaje})
+            resultado, mensaje, solucion = Biseccion.biseccionRel(Fcorregida, limiteInf, limiteSup, tol, niter)
 
-def GraficaSolucion(request, funcion, solucion):
-    Grafica = None
-    if funcion and solucion:
-        funcion = unquote(funcion)
-        Grafica = Grafica.GraficarSolucion(funcion, solucion)
-
-    return render(request, 'graficaSolucion.html', {'Grafica': Grafica, 'funcion': funcion})
-
-def codificar_funcion(funcion):
-    # Divide la función en segmentos
-    segmentos = funcion.split(' ')
-
-    # Codifica cada segmento y guárdalo en una lista
-    segmentos_codificados = [quote(segmento) for segmento in segmentos]
-
-    # Une los segmentos codificados con espacios en blanco
-    funcion_codificada = ' '.join(segmentos_codificados)
-
-    return funcion_codificada
+        if(solucion == None):
+            pass
+        else:
+            grafica = Grafica.GraficarSolucion(funcion, float(solucion))
+    return render(request, 'biseccion.html', {'resultado': resultado, 'mensaje': mensaje, 'grafica': grafica})
 
 def jacobiSeid(request):
     datos_iteraciones = None

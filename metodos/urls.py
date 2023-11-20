@@ -10,7 +10,6 @@ urlpatterns = [
     path('secante', views.secante, name= "secante"),
     path('raicesMultiples', views.raicesMultiples, name="raicesMultiples"),
     path('PuntoFijo/', views.puntofijo, name = "PuntoFijo"),
-    path('graficaSolucion/<str:funcion>/<int:solucion>', views.GraficaSolucion, name="graficaSolucion"),
     path('jacobiSeid/', views.jacobiSeid, name = "jacobiSeid"),
     path('sor/', views.SOR, name = "SOR"),
 ]

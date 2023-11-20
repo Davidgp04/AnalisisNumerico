@@ -29,16 +29,15 @@ class NewtonRaphson:
         if fx == 0:
             solucion = "{:.5f}".format(x)
             mensaje = str(solucion) + " es raiz de f(x)"
-            return resultados, mensaje
+            return resultados, mensaje, solucion
         elif Error <= tol:
             solucion = "{:.5f}".format(x)
             mensaje = str(solucion) + " es una aproximacion de un raiz de f(x) con una tolerancia " + str(tol)
-            return resultados, mensaje
+            return resultados, mensaje, solucion
         else:
             solucion = "{:.5f}".format(x)
-            print("fracaso en ", niter, " iteraciones ")
             mensaje = "fracaso en " + str(niter) + " iteraciones"
-            return None, mensaje
+            return resultados, mensaje, None
         
         
         
@@ -69,13 +68,12 @@ class NewtonRaphson:
         if fx == 0:
             solucion = "{:.5f}".format(x)
             mensaje = str(solucion) + " es raiz de f(x)"
-            return resultados, mensaje
+            return resultados, mensaje, solucion
         elif Error <= tol:
             solucion = "{:.5f}".format(x)
             mensaje = str(solucion) + " es una aproximacion de un raiz de f(x) con una tolerancia " + str(tol)
-            return resultados, mensaje
+            return resultados, mensaje, solucion
         else:
             solucion = "{:.5f}".format(x)
-            print("fracaso en ", niter, " iteraciones ")
             mensaje = "fracaso en " + str(niter) + " iteraciones"
-            return None, mensaje
+            return resultados, mensaje, None

@@ -1,7 +1,21 @@
+.content-container {
+    display: flex;
+    margin-top: 50px;
+  }
+  
+  .left-column {
+    flex: 1;
+  }
+  
+  .right-column {
+    flex: 1;
+    padding-left: 300px; /* Espacio entre columnas */
 
+  }
+  
 
 table{
-    width: 30%;
+    width: 45%;
     height: 100%;
 }
 
@@ -16,4 +30,91 @@ tr,th,td{
 
 tr{
     height: 50px;
+}
+
+.matrixSizeForm {
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    
+    text-align: left; /* Alineación a la izquierda */
+  }
+  
+  .matrixSizeForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .matrixSizeForm input[type="number"] {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .matrixSizeForm input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .matrixSizeForm input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  .matrixForm {
+    width: auto;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilos para las etiquetas */
+  .matrixForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Estilos para los input de números */
+  .matrixForm input[type="number"] {
+    width: 100px;
+    margin: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilos para el botón enviar */
+  .matrixForm input[type="submit"] {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .matrixForm input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+
+  .input-container {
+    margin-bottom: 10px;
+  }
+  .input-container input[type="number"],
+.input-container input[type="text"] {
+  width: 70px;
+  margin: 5px;
+  padding: 5px;
+  box-sizing: border-box;
 }

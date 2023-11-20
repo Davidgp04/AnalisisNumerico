@@ -4,8 +4,10 @@
 {% endblock styles %}
 
 {% block content %}
+<div class="content-container">
+    <div class="left-column">
 <h2>Defina el tamaño de la matriz</h2>
-<form id="matrixSizeForm">
+<form id="matrixSizeForm" class="matrixSizeForm">
     <label for="rows">Número de filas:</label>
     <input type="number" id="rows" name="rows" min="1" required>
     <label for="columns">Número de columnas:</label>
@@ -13,7 +15,7 @@
     <input type="submit" value="Enviar">
 </form>
 <h2>Ingrese los elementos de la matriz</h2>
-<form method="post" id="matrixForm" style="display: none;">
+<form method="post" class="matrixForm" id="matrixForm" style="display: none;">
     {% csrf_token %}
     <label>Ingrese la matriz A</label>
     <div id="matrixInputs"></div>
@@ -25,21 +27,23 @@
     <div id="initialValue"></div>
     <br>
     <label>Tolerancia</label>
-    <br>
-    <input type="text" name="Tol" />
-    <br>
+    <div class="input-container">
+        <input type="text" name="Tol" />
+    </div>
     <label>Valor w</label>
-    <br>
-    <input type="text" name="w">
-    <br>
+    <div class="input-container">
+        <input type="text" name="w">
+    </div>
     <label>Iteraciones</label>
-    <br>
-    <input type="number" name="Iter">
-    <br>
+    <div class="input-container">
+        <input type="number" name="Iter">
+    </div>
     <input type="hidden" id="rowsInput" name="rows">
     <input type="hidden" id="columnsInput" name="columns">
     <input type="submit" value="Enviar">
 </form>
+</div>
+<div class="right-column">
 <div class="table-container">
 <table>
     <thead>
@@ -69,6 +73,8 @@
 <p>{{ mensaje }}</p>
 <br>
 <p>{{ converge }}</p>
+</div>
+</div>
 {% endblock content %}
 
 {% block scripts %}

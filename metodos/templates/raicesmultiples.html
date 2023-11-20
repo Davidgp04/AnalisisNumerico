@@ -61,6 +61,9 @@
     </tr>
     {% endif %}
   </table>
+{% if grafica %}
+  {{ grafica|safe }}
+{% endif %}
 </div>
 <p>{{mensaje}}</p>
 {% endblock content%}

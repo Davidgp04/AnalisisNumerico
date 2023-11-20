@@ -61,9 +61,11 @@
     </tr>
     {% endif %}
   </table>
+
+{% if grafica %}
+  {{ grafica|safe }}
+{% endif %}
 </div>
-<p>{{mensaje}}</p>
-{% if funcion %}
-  <a href="http://127.0.0.1:8000/graficaSolucion/{{funcion}}/{{solucion}}">Graficar Solucion</a>
-{% endif %}  
+<p>{{mensaje}}</p> 
+
 {% endblock content%}
