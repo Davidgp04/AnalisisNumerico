@@ -13,4 +13,9 @@ urlpatterns = [
     path('PuntoFijo/', views.puntofijo, name = "PuntoFijo"),
     path('jacobiSeid/', views.jacobiSeid, name = "jacobiSeid"),
     path('sor/', views.SOR, name = "SOR"),
+    path('vandermonde/', views.vandermonde, name = "vandermonde"),
+    path('newton/', views.newton, name = "newton"),
+    path('lagrange/', views.lagrange, name = "lagrange"),
+    path('spline/', views.spline, name = "spline"),
+    
 ]

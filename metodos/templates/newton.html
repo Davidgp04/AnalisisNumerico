@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% load static %} {% block styles %}
+<link rel="stylesheet" href="{% static 'css/biseccion.css' %}" />
+{% endblock styles %} {% block content %}
+
+
+<form id="matrixSizeForm" class="matrixSizeForm">
+    <label for="columns">Número de variables:</label>
+    
+    <input type="number" id="columns" name="columns" min="1" required>
+    <input type="submit" value="Enviar">
+</form>
+<div class="">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div>
+        <div id="matrixInputs" class="matrixInputs"></div>
+
+    </div>
+    <input type="hidden" id="columnsInput" name="columns">
+    <button type="submit">Calcular</button>
+  </form>
+
+{% if grafica %}
+  {{ grafica|safe }}
+{% endif %}
+</div>
+<p>{{mensaje}}</p>
+
+{% endblock content%}
+{% block scripts %}
+<script>
+    document.getElementById('matrixSizeForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+ 
+        var columns = parseInt(document.getElementById('columns').value);
+        
+        document.getElementById('columnsInput').value = columns;
+
+        var matrixInputs = document.getElementById('matrixInputs');
+        matrixInputs.innerHTML = '';
+        var letraX = document.createElement('p');
+        letraX.innerHTML = "X"
+        matrixInputs.appendChild(letraX)
+        for (var j = 0; j < columns; j++) {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'x_' + j;
+            input.placeholder = 'x' + "_" + j;
+            input.required = true;
+            matrixInputs.appendChild(input);
+        }
+        matrixInputs.appendChild(document.createElement('br'));
+        var letraY = document.createElement('p');
+        letraY.innerHTML = "Y";
+        matrixInputs.appendChild(letraY)
+        letraX.style.display= "inline-block"
+        letraY.style.display= "inline-block"
+        for (var i = 0; i < columns; i++) {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'y_' + i;
+            input.placeholder = 'y' + "_" + i;
+            input.required = true;
+            matrixInputs.appendChild(input);
+        }
+        
+    });
+</script>
+{% endblock scripts %}

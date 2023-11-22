@@ -9,6 +9,7 @@ from metodos.PuntoFijo import PuntoFijo
 from metodos.ReglaFalsa import ReglaFalsa
 from metodos.RaicesMultiples import RaicesMultiples
 from metodos.RaicesMultiples2 import RaicesMultiples2
+from metodos.polinomio import Polinomio
 import matlab.engine
 import numpy as np
 
@@ -366,3 +367,185 @@ def SOR(request):
         else:
             converge = 'El metodo no converge porque su ρ(T) es de ' + str(radioEspectral)
     return render(request, 'SOR.html', {'datos_iteraciones': datos_iteraciones, 'mensaje':mensaje, 'converge':converge})
+
+
+def vandermonde(request):
+    grafica = None
+    if request.method == 'POST':
+        columnas = request.POST['columns']
+        columnas = int(columnas)
+        vectorX = [[] for _ in range(columnas)]
+        vectorY = [[] for _ in range(columnas)]
+       
+        for j in range(0, columnas):
+                elemento = f'x_{j}'
+                vectorX[j].append(float(request.POST[elemento]))
+                
+              
+        for j in range(0, columnas):
+                elemento = f'y_{j}'
+                vectorY[j].append(float(request.POST[elemento]))
+        x = matlab.double(vectorX)
+        y = matlab.double(vectorY)
+        Result = eng.vander(x,y)
+
+        grado = len(Result[0])
+        coeficientes = [item[0] for item in Result]
+        print(coeficientes)
+        # Crear el polinomio a partir de los coeficientes
+        polinomiores = Polinomio.crear_polinomio_vander(coeficientes)
+
+        x_np = np.array(x)
+        minimo_x = np.min(x_np)
+        maximo_x = np.max(x_np)
+
+        y_np = np.array(y)
+        minimo_y = np.min(y_np)
+        maximo_y = np.max(y_np)
+
+
+        grafica = Grafica.GraficarPolinomio(polinomiores,minimo_x,maximo_x,minimo_y,maximo_y)
+
+        # Imprimir el polinomio
+       
+
+        
+    return render(request, 'vandermonde.html',  {'grafica': grafica})
+
+def newton(request):
+    grafica = None
+    if request.method == 'POST':
+        columnas = request.POST['columns']
+        columnas = int(columnas)
+        vectorX = [[] for _ in range(columnas)]
+        vectorY = [[] for _ in range(columnas)]
+       
+        for j in range(0, columnas):
+                elemento = f'x_{j}'
+                vectorX[j].append(float(request.POST[elemento]))
+                
+              
+        for j in range(0, columnas):
+                elemento = f'y_{j}'
+                vectorY[j].append(float(request.POST[elemento]))
+                
+        x = matlab.double(vectorX)
+        y = matlab.double(vectorY)
+
+        x_np = np.array(x)
+        x_np = x_np.flatten()
+        minimo_x = np.min(x_np)
+        maximo_x = np.max(x_np)
+
+        y_np = np.array(y)
+        y_np = y_np.flatten()
+        minimo_y = np.min(y_np)
+        maximo_y = np.max(y_np)
+
+        Result = eng.Newtonint(x,y,nargout=2)
+
+        tabla = np.array(Result[0])
+        coef = np.array(Result[1])
+        coef = coef.flatten()
+
+        polinomiores = Polinomio.polinomio_newton_string(coef, x_np)
+        
+
+
+        grafica = Grafica.GraficarPolinomio(polinomiores,minimo_x,maximo_x,minimo_y,maximo_y)
+
+        
+       
+
+        
+    return render(request, 'newton.html',  {'grafica': grafica})
+
+def lagrange(request):
+    grafica = None
+    if request.method == 'POST':
+        columnas = request.POST['columns']
+        columnas = int(columnas)
+        vectorX = [[] for _ in range(columnas)]
+        vectorY = [[] for _ in range(columnas)]
+       
+        for j in range(0, columnas):
+                elemento = f'x_{j}'
+                vectorX[j].append(float(request.POST[elemento]))
+                
+              
+        for j in range(0, columnas):
+                elemento = f'y_{j}'
+                vectorY[j].append(float(request.POST[elemento]))
+                
+                
+        x = matlab.double(vectorX)
+        y = matlab.double(vectorY)
+        
+        x_np = np.array(x)
+        x_np_np = x_np.flatten()
+        minimo_x = np.min(x_np)
+        maximo_x = np.max(x_np)
+
+        y_np = np.array(y)
+        y_np = y_np.flatten()
+        minimo_y = np.min(y_np)
+        maximo_y = np.max(y_np)
+
+        Result = eng.Lagrange(x,y)
+        
+
+        polinomiores = Polinomio.lagrange_polynomial(x_np, y_np)
+        
+
+        grafica = Grafica.GraficarPolinomio(polinomiores,minimo_x,maximo_x,minimo_y,maximo_y)
+       
+       
+
+        
+    return render(request, 'lagrange.html',  {'grafica': grafica})
+
+def spline(request):
+    grafica = None
+    if request.method == 'POST':
+        columnas = request.POST['columns']
+        columnas = int(columnas)
+        vectorX = [[] for _ in range(columnas)]
+        vectorY = [[] for _ in range(columnas)]
+       
+        for j in range(0, columnas):
+                elemento = f'x_{j}'
+                vectorX[j].append(float(request.POST[elemento]))
+                
+              
+        for j in range(0, columnas):
+                elemento = f'y_{j}'
+                vectorY[j].append(float(request.POST[elemento]))
+                
+                
+        x = matlab.double(vectorX)
+        y = matlab.double(vectorY)
+        d = 3
+
+        x_np = np.array(x)
+        x_np_np = x_np.flatten()
+        minimo_x = np.min(x_np)
+        maximo_x = np.max(x_np)
+
+        y_np = np.array(y)
+        y_np = y_np.flatten()
+        minimo_y = np.min(y_np)
+        maximo_y = np.max(y_np)
+
+        Result = eng.Spline(x,y,d)
+        Result_np = np.array(Result)
+        funciones = []
+        for i in range(len(x_np)-1):
+            funcion = Polinomio.crear_polinomio_spline(Result[i])
+            funciones.append(funcion)
+       
+        grafica = Grafica.GraficarFunciones(funciones,minimo_x,maximo_x,minimo_y,maximo_y)
+       
+       
+
+        
+    return render(request, 'spline.html',  {'grafica': grafica})
